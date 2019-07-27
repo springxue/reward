@@ -10,7 +10,10 @@
     <select id="getUserInfoByOpenid" resultType="com.weixin.reward.bean.UserInfo">
         select * from userInfo
     </select>
-    <insert id="addMessage">
-
+    <insert id="addUserMessage" parameterType="com.weixin.reward.bean.UserMessage">
+        insert into message (openid,nickName,content) values(#{openid},#{nickName},#{content})
     </insert>
+    <select id="getUserMessageListByOpenid" resultType="com.weixin.reward.bean.UserMessage">
+        select * from message where openid=#{openid}
+    </select>
 </mapper>

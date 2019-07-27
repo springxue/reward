@@ -1,6 +1,7 @@
 package com.weixin.reward.controller;
 
 import com.weixin.reward.bean.UserInfo;
+import com.weixin.reward.bean.UserMessage;
 import com.weixin.reward.service.RewardService;
 import com.weixin.reward.service.UserInfoService;
 import net.sf.json.JSONObject;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -36,16 +38,36 @@ public class RewardController {
     @RequestMapping("/saveUserInfo")
     @ResponseBody
     public String saveUserInfo(@RequestBody UserInfo userInfo){
-        userInfoService.saveUserInfo(userInfo);
+        try {
+            userInfoService.saveUserInfo(userInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return "error";
+        }
         return "success";
     }
+
     @RequestMapping("/getUserInfo")
     @ResponseBody
     public UserInfo getUserInfo(@RequestParam String openid){
         return userInfoService.getUserInfoByOpenid(openid);
-
     }
 
+    @RequestMapping("/addUserMessage")
+    @ResponseBody
+    public String addUserMessage(@RequestBody UserMessage userMessage){
+        try{
+            userInfoService.addUserMessage(userMessage);
+        }catch (Exception e){
+            e.printStackTrace();
+            return "error";
+        }
+        return "success";
+    }
 
-
+    @RequestMapping("/getUserMessageListByOpenid")
+    @ResponseBody
+    public List<UserMessage> getUserMessageListByOpenid(@RequestParam String openid){
+       return userInfoService.getUserMessageListByOpenid(openid);
+    }
 }
