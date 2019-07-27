@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weixin.reward.dao.UserInfoDao">
+        <insert id="saveUserInfo" parameterType="com.weixin.reward.bean.UserInfo">
+            insert into userInfo (avatarUrl,city,country,gender,language,nickName,province,openid,session_key)
+            values (#{avatarUrl},#{city},#{country},#{gender},#{language},#{nickName},#{province},#{openid},#{session_key})
+        </insert>
+    <select id="getUserInfoByOpenid" resultType="com.weixin.reward.bean.UserInfo">
+        select * from userInfo
+    </select>
+    <insert id="addMessage">
+
+    </insert>
+</mapper>
