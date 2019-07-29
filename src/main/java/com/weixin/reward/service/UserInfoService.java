@@ -24,4 +24,6 @@ public class UserInfoService {
     public List<UserMessage> getUserMessageListByOpenid(String openid){
         return userInfoDao.getUserMessageListByOpenid(openid);
     }
+
+
 }

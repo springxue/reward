@@ -3,14 +3,8 @@ package com.weixin.reward.controller;
 import com.weixin.reward.bean.UserInfo;
 import com.weixin.reward.bean.UserMessage;
 import com.weixin.reward.service.RewardService;
+import com.weixin.reward.service.SettingService;
 import com.weixin.reward.service.UserInfoService;
-import net.sf.json.JSONObject;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +21,8 @@ public class RewardController {
     RewardService rewardService;
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    SettingService settingService;
 
     @RequestMapping("/getOpenId")
     @ResponseBody
@@ -69,5 +65,10 @@ public class RewardController {
     @ResponseBody
     public List<UserMessage> getUserMessageListByOpenid(@RequestParam String openid){
        return userInfoService.getUserMessageListByOpenid(openid);
+    }
+    @RequestMapping("/getSerial")
+    @ResponseBody
+    public String getSerial(){
+        return settingService.getSerial();
     }
 }
