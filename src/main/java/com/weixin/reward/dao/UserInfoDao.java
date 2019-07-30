@@ -13,4 +13,6 @@ public interface UserInfoDao {
    public UserInfo getUserInfoByOpenid(String openid);
    public void addUserMessage(UserMessage userMessage);
    public List<UserMessage> getUserMessageListByOpenid(@Param("openid") String openid);
+
+   public void updateUserInfo(UserInfo userInfo);
 }

@@ -13,7 +13,11 @@ public class UserInfoService {
     @Autowired
     UserInfoDao userInfoDao;
     public void saveUserInfo(UserInfo userInfo){
-        userInfoDao.saveUserInfo(userInfo);
+        if(userInfoDao.getUserInfoByOpenid(userInfo.getOpenid())==null){
+            userInfoDao.saveUserInfo(userInfo);
+        }else {
+            userInfoDao.updateUserInfo(userInfo);
+        }
     }
     public UserInfo getUserInfoByOpenid(String openid){
      return userInfoDao.getUserInfoByOpenid(openid);
@@ -25,5 +29,7 @@ public class UserInfoService {
         return userInfoDao.getUserMessageListByOpenid(openid);
     }
 
-
+    public void updateUserInfo(UserInfo userInfo) {
+        userInfoDao.updateUserInfo(userInfo);
+    }
 }

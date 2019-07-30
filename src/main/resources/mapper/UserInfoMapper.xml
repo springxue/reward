@@ -16,4 +16,17 @@
     <select id="getUserMessageListByOpenid" resultType="com.weixin.reward.bean.UserMessage">
         select * from message where openid=#{openid}
     </select>
+    <update id="updateUserInfo" parameterType="com.weixin.reward.bean.UserInfo">
+        update userInfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="city!=null">city=#{city},</if>
+            <if test="country!=null">country=#{country},</if>
+            <if test="gender!=null">gender=#{gender},</if>
+            <if test="language!=null">language=#{language},</if>
+            <if test="nickName!=null">nickName=#{nickName},</if>
+            <if test="province!=null">province=#{province},</if>
+            <if test="session_key!=null">session_key=#{session_key},</if>
+        </trim>
+        where openid=#{openid}
+    </update>
 </mapper>
