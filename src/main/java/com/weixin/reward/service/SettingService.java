@@ -18,9 +18,9 @@ public class SettingService {
 
     public String getReward() {
         String serial=settingDao.getSerial();
-        int index=Character.getNumericValue(serial.charAt(settingDao.getIndex()));
-
-        String reward=settingDao.getReward(index-1);
+        int num=Character.getNumericValue(serial.charAt(settingDao.getIndex()));
+        int index=settingDao.getIndex();
+        String reward=settingDao.getReward(num);
         if(index==7){
             settingDao.setIndex(0);
         }else {

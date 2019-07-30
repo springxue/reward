@@ -16,6 +16,7 @@ public class SettingController {
     public String getSerial() {
       return settingService.getSerial();
     }
+
     @RequestMapping("/setSerial")
     @ResponseBody
     public String setSerial(@RequestParam String serial) {
