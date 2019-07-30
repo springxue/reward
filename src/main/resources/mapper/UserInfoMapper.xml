@@ -8,7 +8,7 @@
             values (#{avatarUrl},#{city},#{country},#{gender},#{language},#{nickName},#{province},#{openid},#{session_key})
         </insert>
     <select id="getUserInfoByOpenid" resultType="com.weixin.reward.bean.UserInfo">
-        select * from userInfo
+        select * from userInfo where openid=#{openid}
     </select>
     <insert id="addUserMessage" parameterType="com.weixin.reward.bean.UserMessage">
         insert into message (openid,nickName,content) values(#{openid},#{nickName},#{content})
