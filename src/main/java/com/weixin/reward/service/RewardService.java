@@ -19,10 +19,10 @@ public class RewardService {
         //拼接url
         StringBuilder url = new StringBuilder("https://api.weixin.qq.com/sns/jscode2session?");
         url.append("appid=");//appid设置
-        url.append("wx1847a9e0c7ea3036");
+        url.append("wxa7650780ab7edbbf");
 //        url.append(requestParam.getAppid());
         url.append("&secret=");//secret设置
-        url.append("8e547ebf6d6e741d46171ac77ca44474");
+        url.append("fcc9b852cb865e3fedd4cba028f69008");
 //        url.append(requestParam.getSecret());
         url.append("&js_code=");//code设置
 //        url.append("ca44474");

@@ -27,16 +27,16 @@ public class RewardController {
     @RequestMapping("/getOpenId")
     @ResponseBody
     //获取openid
-    public Map getOpenid(@RequestParam String code){
+    public Map getOpenid(@RequestParam String code) {
         return rewardService.getOpenid(code);
     }
 
     @RequestMapping("/saveUserInfo")
     @ResponseBody
-    public String saveUserInfo(@RequestBody UserInfo userInfo){
+    public String saveUserInfo(@RequestBody UserInfo userInfo) {
         try {
             userInfoService.saveUserInfo(userInfo);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
@@ -45,16 +45,16 @@ public class RewardController {
 
     @RequestMapping("/getUserInfo")
     @ResponseBody
-    public UserInfo getUserInfo(@RequestParam String openid){
+    public UserInfo getUserInfo(@RequestParam String openid) {
         return userInfoService.getUserInfoByOpenid(openid);
     }
 
     @RequestMapping("/addUserMessage")
     @ResponseBody
-    public String addUserMessage(@RequestBody UserMessage userMessage){
-        try{
+    public String addUserMessage(@RequestBody UserMessage userMessage) {
+        try {
             userInfoService.addUserMessage(userMessage);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return "error";
         }
@@ -63,12 +63,12 @@ public class RewardController {
 
     @RequestMapping("/getUserMessageListByOpenid")
     @ResponseBody
-    public List<UserMessage> getUserMessageListByOpenid(@RequestParam String openid){
-       return userInfoService.getUserMessageListByOpenid(openid);
+    public List<UserMessage> getUserMessageListByOpenid(@RequestParam String openid) {
+        return userInfoService.getUserMessageListByOpenid(openid);
     }
-    @RequestMapping("/getSerial")
+    @RequestMapping("/getReward")
     @ResponseBody
-    public String getSerial(){
-        return settingService.getSerial();
+    public String getReward() {
+        return  settingService.getReward();
     }
 }

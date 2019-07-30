@@ -6,4 +6,16 @@
     <select id="getSerial" resultType="java.lang.String">
         select serial from setting
     </select>
+    <select id="setSerial">
+        update setting set serial=#{serial}
+    </select>
+    <select id="getIndex" resultType="java.lang.Integer">
+        select reward_index from setting
+    </select>
+    <update id="setIndex">
+        update setting set reward_index=#{index}
+    </update>
+    <select id="getReward" resultType="java.lang.String">
+        select box${index} from setting
+    </select>
 </mapper>
