@@ -1,5 +1,6 @@
 package com.weixin.reward.service;
 
+import com.weixin.reward.bean.Setting;
 import com.weixin.reward.dao.SettingDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,13 @@ public class SettingService {
             settingDao.setIndex(index+1);
         }
         return reward;
+    }
+
+    public void setSetting(Setting setting) {
+        settingDao.setSetting(setting);
+    }
+
+    public Setting getSetting() {
+        return settingDao.getSetting();
     }
 }

@@ -18,4 +18,21 @@
     <select id="getReward" resultType="java.lang.String">
         select box${index} from setting
     </select>
+    <update id="setSetting" parameterType="com.weixin.reward.bean.Setting">
+        update setting
+        <trim prefix="set" suffixOverrides=",">
+            <if test="box0!=null">box0=#{box0},</if>
+            <if test="box1!=null">box1=#{box1},</if>
+            <if test="box2!=null">box2=#{box2},</if>
+            <if test="box3!=null">box3=#{box3},</if>
+            <if test="box4!=null">box4=#{box4},</if>
+            <if test="box5!=null">box5=#{box5},</if>
+            <if test="box6!=null">box6=#{box6},</if>
+            <if test="box7!=null">box7=#{box7},</if>
+        </trim>
+        where id=1
+    </update>
+    <select id="getSetting" resultType="com.weixin.reward.bean.Setting">
+        select * from setting where id=1
+    </select>
 </mapper>
