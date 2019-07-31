@@ -13,6 +13,7 @@ public class UserInfoService {
     @Autowired
     UserInfoDao userInfoDao;
     public void saveUserInfo(UserInfo userInfo){
+        System.out.println(userInfo);
         if(userInfoDao.getUserInfoByOpenid(userInfo.getOpenid())==null){
             userInfoDao.saveUserInfo(userInfo);
         }else {

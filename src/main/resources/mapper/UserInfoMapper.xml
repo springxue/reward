@@ -4,8 +4,56 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weixin.reward.dao.UserInfoDao">
         <insert id="saveUserInfo" parameterType="com.weixin.reward.bean.UserInfo">
-            insert into userInfo (avatarUrl,city,country,gender,language,nickName,province,openid,session_key)
-            values (#{avatarUrl},#{city},#{country},#{gender},#{language},#{nickName},#{province},#{openid},#{session_key})
+            insert into userInfo (
+            <trim suffixOverrides=",">
+            <if test="avatarUrl!=null and avatarUrl!=''">
+                avatarUrl,
+            </if>
+            <if test="city!=null and city!=''">
+                city,
+            </if>
+            <if test="gender!=null and gender!=''">
+                gender,
+            </if>
+            <if test="language!=null and language!=''">
+                language,
+            </if>
+            <if test="nickName!=null and nickName!=''">
+                nickName,
+            </if>
+            <if test="openid!=null and openid!=''">
+                openid,
+            </if>
+            <if test="session_key!=null and session_key!=''">
+                session_key,
+            </if>
+           </trim>
+            )
+            values (
+            <trim suffixOverrides=",">
+                <if test="avatarUrl!=null and avatarUrl!=''">
+                    #{avatarUrl},
+                </if>
+                <if test="city!=null and city!=''">
+                    #{city},
+                </if>
+                <if test="gender!=null and gender!=''">
+                    #{gender},
+                </if>
+                <if test="language!=null and language!=''">
+                    #{language},
+                </if>
+                <if test="nickName!=null and nickName!=''">
+                    #{nickName},
+                </if>
+                <if test="openid!=null and openid!=''">
+                    #{openid},
+                </if>
+                <if test="session_key!=null and session_key!=''">
+                    #{session_key},
+                </if>
+            </trim>
+            )
         </insert>
     <select id="getUserInfoByOpenid" resultType="com.weixin.reward.bean.UserInfo">
         select * from userInfo where openid=#{openid}
@@ -19,13 +67,15 @@
     <update id="updateUserInfo" parameterType="com.weixin.reward.bean.UserInfo">
         update userInfo
         <trim prefix="set" suffixOverrides=",">
-            <if test="city!=null">city=#{city},</if>
-            <if test="country!=null">country=#{country},</if>
-            <if test="gender!=null">gender=#{gender},</if>
-            <if test="language!=null">language=#{language},</if>
-            <if test="nickName!=null">nickName=#{nickName},</if>
-            <if test="province!=null">province=#{province},</if>
-            <if test="session_key!=null">session_key=#{session_key},</if>
+            <if test="city!=null and city!=''">city=#{city},</if>
+            <if test="country!=null and country!=''">country=#{country},</if>
+            <if test="gender!=null and gender!=''">gender=#{gender},</if>
+            <if test="language!=null and language!=''">language=#{language},</if>
+            <if test="nickName!=null and nickName!=''">nickName=#{nickName},</if>
+            <if test="province!=null and province">province=#{province},</if>
+            <if test="session_key!=null and session_key!=''">session_key=#{session_key},</if>
+            <if test="account!=null and account!=''">account=#{account},</if>
+            <if test="count!=null and count!=''">count=#{count},</if>
         </trim>
         where openid=#{openid}
     </update>

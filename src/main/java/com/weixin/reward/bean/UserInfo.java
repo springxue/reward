@@ -11,6 +11,9 @@ public class UserInfo {
     private String province;
     private String openid;
     private String session_key;
+    private double account;
+    private int count;
+
 
     public Integer getId() {
         return id;
@@ -100,6 +103,22 @@ public class UserInfo {
         this.session_key = session_key;
     }
 
+    public double getAccount() {
+        return account;
+    }
+
+    public void setAccount(double account) {
+        this.account = account;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -113,6 +132,8 @@ public class UserInfo {
                 ", province='" + province + '\'' +
                 ", openid='" + openid + '\'' +
                 ", session_key='" + session_key + '\'' +
+                ", account=" + account +
+                ", count=" + count +
                 '}';
     }
 }
