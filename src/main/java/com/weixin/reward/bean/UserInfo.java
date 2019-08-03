@@ -13,6 +13,7 @@ public class UserInfo {
     private String session_key;
     private double account;
     private int count;
+    private int status;
 
 
     public Integer getId() {
@@ -119,6 +120,14 @@ public class UserInfo {
         this.count = count;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -134,6 +143,7 @@ public class UserInfo {
                 ", session_key='" + session_key + '\'' +
                 ", account=" + account +
                 ", count=" + count +
+                ", status=" + status +
                 '}';
     }
 }

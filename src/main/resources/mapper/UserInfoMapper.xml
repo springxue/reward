@@ -27,7 +27,9 @@
             <if test="session_key!=null and session_key!=''">
                 session_key,
             </if>
+                status,
            </trim>
+
             )
             values (
             <trim suffixOverrides=",">
@@ -52,6 +54,7 @@
                 <if test="session_key!=null and session_key!=''">
                     #{session_key},
                 </if>
+                   0,
             </trim>
             )
         </insert>
@@ -76,6 +79,7 @@
             <if test="session_key!=null and session_key!=''">session_key=#{session_key},</if>
             <if test="account!=null and account!=''">account=#{account},</if>
             <if test="count!=null and count!=''">count=#{count},</if>
+            status=1,
         </trim>
         where openid=#{openid}
     </update>

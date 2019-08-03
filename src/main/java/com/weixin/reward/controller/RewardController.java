@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,47 +32,124 @@ public class RewardController {
     @ResponseBody
     //获取openid
     public Map getOpenid(@RequestParam String code) {
-        return rewardService.getOpenid(code);
+        System.out.println(code);
+        Map openidAndSessionKey=new HashMap();
+        Map result=new HashMap();
+        try{
+            openidAndSessionKey =rewardService.getOpenid(code);
+        }catch (Exception e){
+            e.printStackTrace();
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
+        }
+       result.put("data",openidAndSessionKey);
+       result.put("msg","success");
+        return result;
     }
 
     @RequestMapping("/saveUserInfo")
     @ResponseBody
-    public String saveUserInfo(@RequestBody UserInfo userInfo) {
+    public Map saveUserInfo(@RequestBody UserInfo userInfo) {
+        Map result=new HashMap();
         try {
             userInfoService.saveUserInfo(userInfo);
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
         }
-        return "success";
+        result.put("data",userInfo);
+        result.put("msg","success");
+        return result;
     }
 
     @RequestMapping("/getUserInfo")
     @ResponseBody
-    public UserInfo getUserInfo(@RequestParam String openid) {
-        return userInfoService.getUserInfoByOpenid(openid);
+    public Map getUserInfo(@RequestParam String openid) {
+        Map result=new HashMap();
+        UserInfo userInfo=new UserInfo();
+        try {
+            userInfo=userInfoService.getUserInfoByOpenid(openid);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
+        }
+        result.put("data",userInfo);
+        result.put("msg","success");
+        return result;
     }
 
     @RequestMapping("/addUserMessage")
     @ResponseBody
-    public String addUserMessage(@RequestBody UserMessage userMessage) {
+    public Map addUserMessage(@RequestBody UserMessage userMessage) {
+        Map result=new HashMap();
         try {
             userInfoService.addUserMessage(userMessage);
         } catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
         }
-        return "success";
+        result.put("msg","success");
+        result.put("data",userInfoService.getUserInfoByOpenid(userMessage.getOpenid()));
+        return result;
     }
 
     @RequestMapping("/getUserMessageListByOpenid")
     @ResponseBody
-    public List<UserMessage> getUserMessageListByOpenid(@RequestParam String openid) {
-        return userInfoService.getUserMessageListByOpenid(openid);
+    public Map getUserMessageListByOpenid(@RequestParam String openid) {
+        List<UserMessage> userMessageList=new ArrayList<>();
+        Map result=new HashMap();
+        try{
+            userMessageList=userInfoService.getUserMessageListByOpenid(openid);
+        }catch (Exception e){
+            e.printStackTrace();
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
+        }
+        result.put("data",userMessageList);
+        result.put("msg","success");
+        return result;
     }
     @RequestMapping("/getReward")
     @ResponseBody
-    public String getReward() {
-        return  settingService.getReward();
+    public Map getReward() {
+        Map result=new HashMap();
+        String reward=null;
+        try {
+            reward=settingService.getReward();
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
+        }
+        result.put("msg","success");
+        result.put("data",reward);
+        return result;
     }
 }
