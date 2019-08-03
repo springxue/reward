@@ -66,7 +66,7 @@ public class RewardController {
             result.put("exception",str);
             return result;
         }
-        result.put("data",userInfo);
+        result.put("data",userInfoService.getUserInfoByOpenid(userInfo.getOpenid()));
         result.put("msg","success");
         return result;
     }

@@ -80,14 +80,6 @@ public class UserInfo {
         this.province = province;
     }
 
-    public String getOpenId() {
-        return openid;
-    }
-
-    public void setOpenId(String openId) {
-        this.openid = openId;
-    }
-
     public String getOpenid() {
         return openid;
     }
