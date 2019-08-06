@@ -36,6 +36,12 @@
                 <if test="share!=null and share!=''">
                     share,
                 </if>
+                <if test="country!=null and country!=''">
+                    country,
+                </if>
+                <if test="province!=null and province!=''">
+                    province,
+                </if>
                 status,
            </trim>
 

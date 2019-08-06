@@ -11,10 +11,10 @@ public class UserInfo {
     private String province;
     private String openid;
     private String session_key;
-    private double account;
-    private int count;
-    private int status;
-    private int share;
+    private Double account;
+    private Integer count;
+    private Integer status;
+    private Integer share;
 
 
     public Integer getId() {
@@ -97,35 +97,35 @@ public class UserInfo {
         this.session_key = session_key;
     }
 
-    public double getAccount() {
+    public Double getAccount() {
         return account;
     }
 
-    public void setAccount(double account) {
+    public void setAccount(Double account) {
         this.account = account;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getShare() {
+    public Integer getShare() {
         return share;
     }
 
-    public void setShare(int share) {
+    public void setShare(Integer share) {
         this.share = share;
     }
 
