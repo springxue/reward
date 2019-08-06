@@ -14,6 +14,7 @@ public class UserInfo {
     private double account;
     private int count;
     private int status;
+    private int share;
 
 
     public Integer getId() {
@@ -120,6 +121,14 @@ public class UserInfo {
         this.status = status;
     }
 
+    public int getShare() {
+        return share;
+    }
+
+    public void setShare(int share) {
+        this.share = share;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -136,6 +145,7 @@ public class UserInfo {
                 ", account=" + account +
                 ", count=" + count +
                 ", status=" + status +
+                ", share=" + share +
                 '}';
     }
 }
