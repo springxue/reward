@@ -2,9 +2,9 @@ package com.weixin.reward.util;
 
 import com.github.wxpay.sdk.IWXPayDomain;
 import com.github.wxpay.sdk.WXPayConfig;
-
 import com.github.wxpay.sdk.WXPayConstants;
-import org.springframework.beans.factory.annotation.Value;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -17,18 +17,18 @@ public class IWxPayConfig extends WXPayConfig { // 继承sdk WXPayConfig 实现s
 
     private byte[] certData;
 
+//    @Value("${vendor.wx.config.app_id}")
     private String app_id="wxa7650780ab7edbbf";
 
+//    @Value("${vendor.wx.pay.key}")
     private String wx_pay_key="fcc9b852cb865e3fedd4cba028f69008";
 
+//    @Value("${vendor.wx.pay.mch_id}")
     private String wx_pay_mch_id="1547881691";
 
     public IWxPayConfig() throws Exception { // 构造方法读取证书, 通过getCertStream 可以使sdk获取到证书
-        String certPath = "src/main/resources/cert/apiclient_cert.p12";
-        File file = new File(certPath);
-        InputStream certStream = new FileInputStream(file);
-        this.certData = new byte[(int) file.length()];
-        certStream.read(this.certData);
+        InputStream certStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("cert/apiclient_cert.p12");
+        this.certData = IOUtils.toByteArray(certStream);
         certStream.close();
     }
 
@@ -60,7 +60,7 @@ public class IWxPayConfig extends WXPayConfig { // 继承sdk WXPayConfig 实现s
 
             }
             @Override
-            public DomainInfo getDomain(WXPayConfig config) {
+            public IWXPayDomain.DomainInfo getDomain(WXPayConfig config) {
                 return new IWXPayDomain.DomainInfo(WXPayConstants.DOMAIN_API, true);
             }
         };
