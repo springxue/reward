@@ -2,7 +2,6 @@ package com.weixin.reward.controller;
 
 import com.github.wxpay.sdk.WXPay;
 import com.github.wxpay.sdk.WXPayUtil;
-import com.weixin.reward.util.BaseResponse;
 import com.weixin.reward.util.IWxPayConfig;
 import com.weixin.reward.util.WxpayParam;
 import org.springframework.stereotype.Controller;
