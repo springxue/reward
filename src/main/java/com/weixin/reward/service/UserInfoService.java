@@ -6,6 +6,7 @@ import com.weixin.reward.dao.UserInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,6 +25,7 @@ public class UserInfoService {
      return userInfoDao.getUserInfoByOpenid(openid);
     }
     public void addUserMessage(UserMessage userMessage){
+        userMessage.setCreateTime(new Date());
         userInfoDao.addUserMessage(userMessage);
     }
     public List<UserMessage> getUserMessageListByOpenid(String openid){

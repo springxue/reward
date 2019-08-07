@@ -92,10 +92,10 @@
         select * from userInfo where openid=#{openid}
     </select>
     <insert id="addUserMessage" parameterType="com.weixin.reward.bean.UserMessage">
-        insert into message (openid,nickName,content) values(#{openid},#{nickName},#{content})
+        insert into message (openid,nickName,content,createTime) values(#{openid},#{nickName},#{content},#{createTime})
     </insert>
     <select id="getUserMessageListByOpenid" resultType="com.weixin.reward.bean.UserMessage">
-        select * from message where openid=#{openid}
+        select * from message where openid=#{openid} order by createTIme desc
     </select>
     <update id="updateUserInfo" parameterType="com.weixin.reward.bean.UserInfo">
         update userInfo
