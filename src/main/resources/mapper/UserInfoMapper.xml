@@ -78,6 +78,12 @@
                 <if test="share!=null and share!=''">
                     #{share},
                 </if>
+                <if test="country!=null and country!=''">
+                    #{country},
+                </if>
+                <if test="province!=null and province!=''">
+                    #{province},
+                </if>
                    0,
             </trim>
             )
@@ -103,7 +109,7 @@
             <if test="session_key!=null and session_key!=''">session_key=#{session_key},</if>
             <if test="account!=null and account!=''">account=#{account},</if>
             <if test="count!=null and count!=''">count=#{count},</if>
-            <if test="share!=null and share!=''">count=#{share},</if>
+            <if test="share!=null and share!=''">share=#{share},</if>
             status=1,
         </trim>
         where openid=#{openid}
