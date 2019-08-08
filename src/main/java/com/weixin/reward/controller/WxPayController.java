@@ -6,6 +6,7 @@ import com.weixin.reward.bean.WxPrePayRetuern;
 import com.weixin.reward.service.WxPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,11 +26,15 @@ public class WxPayController {
         return  wxPayService.getPrePay(wxPrePayParam,request);
     }
     @RequestMapping(value = "/getPrePayNotify", headers = {"content-type=application/xml"})
-    @ResponseBody
-    public Map getPrePayNotify(@RequestBody WxPrePayRetuern wxPrePayRetuern){
+//    @ResponseBody
+    public String getPrePayNotify(@RequestBody WxPrePayRetuern wxPrePayRetuern,Model model){
         Map map= new HashMap();
         map.put("msg","success");
         map.put("data",wxPrePayRetuern);
-        return map;
+        model.addAttribute("prePayResult",map);
+        return "prePayResult";
+    }
+    public String toPrePayResultPage(){
+        return "prePayResult";
     }
 }
