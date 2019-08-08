@@ -34,7 +34,5 @@ public class WxPayController {
         model.addAttribute("prePayResult",map);
         return "prePayResult";
     }
-    public String toPrePayResultPage(){
-        return "prePayResult";
-    }
+
 }
