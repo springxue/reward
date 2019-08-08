@@ -27,13 +27,13 @@
             <if test="session_key!=null and session_key!=''">
                 session_key,
             </if>
-            <if test="account!=null and account!=''">
+            <if test="account!=null">
                 account,
             </if>
-            <if test="count!=null and count!=''">
+            <if test="count!=null">
                 count,
             </if>
-                <if test="share!=null and share!=''">
+                <if test="share!=null">
                     share,
                 </if>
                 <if test="country!=null and country!=''">
@@ -69,13 +69,13 @@
                 <if test="session_key!=null and session_key!=''">
                     #{session_key},
                 </if>
-                <if test="account!=null and account!=''">
+                <if test="account!=null">
                     #{account},
                 </if>
-                <if test="count!=null and count!=''">
+                <if test="count!=null">
                     #{count},
                 </if>
-                <if test="share!=null and share!=''">
+                <if test="share!=null">
                     #{share},
                 </if>
                 <if test="country!=null and country!=''">
@@ -107,9 +107,9 @@
             <if test="nickName!=null and nickName!=''">nickName=#{nickName},</if>
             <if test="province!=null and province">province=#{province},</if>
             <if test="session_key!=null and session_key!=''">session_key=#{session_key},</if>
-            <if test="account!=null and account!=''">account=#{account},</if>
-            <if test="count!=null and count!=''">count=#{count},</if>
-            <if test="share!=null and share!=''">share=#{share},</if>
+            <if test="account!=null">account=#{account},</if>
+            <if test="count!=null">count=#{count},</if>
+            <if test="share!=null">share=#{share},</if>
             status=1,
         </trim>
         where openid=#{openid}
