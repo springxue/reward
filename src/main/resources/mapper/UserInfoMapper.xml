@@ -42,6 +42,9 @@
                 <if test="province!=null and province!=''">
                     province,
                 </if>
+                <if test="sum_money!=null">
+                    sum_money,
+                </if>
                 status,
            </trim>
 
@@ -84,6 +87,9 @@
                 <if test="province!=null and province!=''">
                     #{province},
                 </if>
+                <if test="sum_money!=null">
+                    #{sum_money},
+                </if>
                    0,
             </trim>
             )
@@ -110,6 +116,7 @@
             <if test="account!=null">account=#{account},</if>
             <if test="count!=null">count=#{count},</if>
             <if test="share!=null">share=#{share},</if>
+            <if test="sum_money!=null">sum_money=#{sum_money},</if>
             status=1,
         </trim>
         where openid=#{openid}
