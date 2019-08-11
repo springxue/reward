@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,8 +33,8 @@ public class WxPayController {
         Map result=new HashMap();
         Map returnData =new HashMap();
         try {
-            String resultXml=wxPrePayService.doWxPrePay(wxPrePayParam);
-           returnData= WXPayUtil.xmlToMap(resultXml);
+            returnData=wxPrePayService.doWxPrePay(wxPrePayParam);
+           returnData.replace("prepay_id","prepay_id="+returnData.get("prepay_id"));
         } catch (Exception e) {
             e.printStackTrace();
             result.put("msg","error");
@@ -48,13 +48,10 @@ public class WxPayController {
         return result;
     }
     @RequestMapping(value = "/getPrePayNotify")
-//    @ResponseBody
-    public String getPrePayNotify(@RequestBody WxPrePayRetuern wxPrePayRetuern,Model model){
-        Map map= new HashMap();
-        map.put("msg","success");
-        map.put("data",wxPrePayRetuern);
-        model.addAttribute("prePayResult",map);
-        return "prePayResult";
+ public String getPrePayNotify(HttpServletRequest request,HttpServletResponse response){
+        System.out.println("========这是回调页面========");
+        System.out.println(request);
+        return null;
     }
-
 }
+

@@ -12,12 +12,16 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 @Service
 public class WxPrePayService {
-    public String doWxPrePay(WxPrePayParam wxPrePayParam) {
+    public Map doWxPrePay(WxPrePayParam wxPrePayParam) {
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
         System.out.println(wxPrePayParam);
         Map<String, String> requestDataMap = new TreeMap<>();
         requestDataMap.put("appid", "wxa7650780ab7edbbf");
@@ -39,8 +43,9 @@ public class WxPrePayService {
         }
         requestDataMap.put("spbill_create_ip", hostAddress);
         requestDataMap.put("sign_type", "MD5");
-
-
+        Date timeStart=new Date();
+        String time_start=simpleDateFormat.format(timeStart);
+        requestDataMap.put("time_start",time_start);
         requestDataMap.put("total_fee", "1");
 
 
@@ -65,9 +70,29 @@ public class WxPrePayService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Map responseMap=new HashMap();
         String responseDataXml = RewardWxPayUtils.doPostByXml("https://api.mch.weixin.qq.com/pay/unifiedorder", requestPayMxl);
         System.out.println(responseDataXml);
-
-        return responseDataXml;
+        try {
+          responseMap=WXPayUtil.xmlToMap(responseDataXml);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        responseMap.put("timeStamp",String.valueOf(timeStart.getTime()/1000));
+        Map secondSign=new TreeMap();
+        secondSign.put("appId",wxPrePayParam.getAppid());
+        secondSign.put("partnerid",wxPrePayParam.getMch_id());
+        secondSign.put("prepayid",responseMap.get("prepay_id"));
+        secondSign.put("noncestr",WXPayUtil.generateNonceStr());
+        secondSign.put("timeStamp",String.valueOf(new Date().getTime()/1000));
+        secondSign.put("package","Sign=WXPay");
+        String sign2="";
+        try {
+            sign2=WXPayUtil.generateSignature(secondSign,"19565cjhgkr526opy5879yrfgt002134", WXPayConstants.SignType.MD5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        secondSign.put("sign",sign2);
+        return secondSign;
     }
 }
