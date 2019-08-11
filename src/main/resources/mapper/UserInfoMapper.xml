@@ -45,6 +45,9 @@
                 <if test="sum_money!=null">
                     sum_money,
                 </if>
+                <if test="state!=null">
+                    state,
+                </if>
                 status,
            </trim>
 
@@ -90,6 +93,9 @@
                 <if test="sum_money!=null">
                     #{sum_money},
                 </if>
+                <if test="state!=null">
+                    #{state},
+                </if>
                    0,
             </trim>
             )
@@ -117,6 +123,7 @@
             <if test="count!=null">count=#{count},</if>
             <if test="share!=null">share=#{share},</if>
             <if test="sum_money!=null">sum_money=#{sum_money},</if>
+            <if test="state!=null">state=#{state},</if>
             status=1,
         </trim>
         where openid=#{openid}

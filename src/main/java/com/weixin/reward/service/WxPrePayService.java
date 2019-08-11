@@ -46,7 +46,7 @@ public class WxPrePayService {
         Date timeStart=new Date();
         String time_start=simpleDateFormat.format(timeStart);
         requestDataMap.put("time_start",time_start);
-        requestDataMap.put("total_fee", "1");
+        requestDataMap.put("total_fee", wxPrePayParam.getTotal_fee());
 
 
         requestDataMap.put("trade_type", "JSAPI");
@@ -78,21 +78,23 @@ public class WxPrePayService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        responseMap.put("timeStamp",String.valueOf(timeStart.getTime()/1000));
-        Map secondSign=new TreeMap();
-        secondSign.put("appId",wxPrePayParam.getAppid());
-        secondSign.put("partnerid",wxPrePayParam.getMch_id());
-        secondSign.put("prepayid",responseMap.get("prepay_id"));
-        secondSign.put("noncestr",WXPayUtil.generateNonceStr());
-        secondSign.put("timeStamp",String.valueOf(new Date().getTime()/1000));
-        secondSign.put("package","Sign=WXPay");
-        String sign2="";
-        try {
-            sign2=WXPayUtil.generateSignature(secondSign,"19565cjhgkr526opy5879yrfgt002134", WXPayConstants.SignType.MD5);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        secondSign.put("sign",sign2);
-        return secondSign;
+        //===========================二次签名=====================
+//        responseMap.put("timeStamp",String.valueOf(timeStart.getTime()/1000));
+//        Map secondSign=new TreeMap();
+//        secondSign.put("appId",wxPrePayParam.getAppid());
+//        secondSign.put("partnerid",wxPrePayParam.getMch_id());
+//        secondSign.put("prepayid",responseMap.get("prepay_id"));
+//        secondSign.put("noncestr",WXPayUtil.generateNonceStr());
+//        secondSign.put("timeStamp",String.valueOf(new Date().getTime()/1000));
+//        secondSign.put("package","Sign=WXPay");
+//        String sign2="";
+//        try {
+//            sign2=WXPayUtil.generateSignature(secondSign,"19565cjhgkr526opy5879yrfgt002134", WXPayConstants.SignType.MD5);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        secondSign.put("sign",sign2);
+//        return secondSign;
+        return responseMap;
     }
 }

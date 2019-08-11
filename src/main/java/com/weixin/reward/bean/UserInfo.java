@@ -16,6 +16,7 @@ public class UserInfo {
     private Integer status;
     private Integer share;
     private Double sum_money;
+    private Integer state;
 
     public Integer getId() {
         return id;
@@ -137,6 +138,14 @@ public class UserInfo {
         this.sum_money = sum_money;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -155,6 +164,7 @@ public class UserInfo {
                 ", status=" + status +
                 ", share=" + share +
                 ", sum_money=" + sum_money +
+                ", state=" + state +
                 '}';
     }
 }

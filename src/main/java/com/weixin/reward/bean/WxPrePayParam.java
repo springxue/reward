@@ -1,7 +1,5 @@
 package com.weixin.reward.bean;
 
-import javafx.scene.Scene;
-
 public class WxPrePayParam {
     //appid
     private String appid="wxa7650780ab7edbbf";
