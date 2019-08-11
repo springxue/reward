@@ -1,14 +1,12 @@
 package com.weixin.reward.controller;
 
 
-import com.github.wxpay.sdk.WXPayUtil;
+import com.weixin.reward.bean.Transfers;
 import com.weixin.reward.bean.WxPrePayParam;
-import com.weixin.reward.bean.WxPrePayRetuern;
 //import com.weixin.reward.service.WxPayService;
-import com.weixin.reward.service.WxPrePayService;
+import com.weixin.reward.service.WxPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,10 +20,15 @@ import java.util.Map;
 @Controller
 public class WxPayController {
 
-//    @Autowired
-//    WxPayService wxPayService;
+
     @Autowired
-    WxPrePayService wxPrePayService;
+    WxPayService wxPayService;
+
+    /**
+     * 预支付接口
+     * @param wxPrePayParam
+     * @return
+     */
     @RequestMapping("/getPrePay")
     @ResponseBody
     public Map getPrePay(@RequestBody WxPrePayParam wxPrePayParam){
@@ -33,7 +36,7 @@ public class WxPayController {
         Map result=new HashMap();
         Map returnData =new HashMap();
         try {
-            returnData=wxPrePayService.doWxPrePay(wxPrePayParam);
+            returnData=wxPayService.doWxPrePay(wxPrePayParam);
            returnData.replace("prepay_id","prepay_id="+returnData.get("prepay_id"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -51,6 +54,14 @@ public class WxPayController {
  public String getPrePayNotify(HttpServletRequest request,HttpServletResponse response){
         System.out.println("========这是回调页面========");
         System.out.println(request);
+        return null;
+    }
+
+
+    @RequestMapping("/payToPerson")
+    @ResponseBody
+    public Map payToPerson(@RequestBody Transfers transfers){
+//        wxPayService.payToPerson(transfers);
         return null;
     }
 }

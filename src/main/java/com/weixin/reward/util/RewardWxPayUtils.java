@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -142,5 +144,21 @@ public class RewardWxPayUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    /**
+     * 获取本机ip
+     * @return
+     */
+    public static String getLocalIp(){
+        InetAddress localhost = null;
+        String hostAddress = "";
+        try {
+            localhost = InetAddress.getLocalHost();
+            hostAddress = localhost.getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+       return hostAddress;
     }
 }

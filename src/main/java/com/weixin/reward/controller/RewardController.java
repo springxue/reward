@@ -28,6 +28,13 @@ public class RewardController {
     @Autowired
     SettingService settingService;
 
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(){
+        return "启动成功";
+    }
+
+
     @RequestMapping("/getOpenId")
     @ResponseBody
     //获取openid
