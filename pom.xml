@@ -65,11 +65,11 @@
             <version>1.1.9</version>
         </dependency>
         <!-- http请求工具包依赖 -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--            <version>4.5.2</version>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib -->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.github.wxpay</groupId>
             <artifactId>wxpay-sdk</artifactId>
-            <version>0.0.3</version>
+            <version>3.0.9</version>
 
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.jdom/jdom2 -->
@@ -118,6 +118,53 @@
             <version>4.0.1</version>
         </dependency>
 
+        <!-- jaskson -->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-annotations</artifactId>-->
+<!--            <version>2.5.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-core</artifactId>-->
+<!--            <version>2.5.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--            <version>2.5.0</version>-->
+<!--        </dependency>-->
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        <!-- http-client -->
+        <dependency>
+            <groupId>com.ning</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>1.9.40</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+
+        <!-- xml -->
+        <dependency>
+            <groupId>net.sf.kxml</groupId>
+            <artifactId>kxml2</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>xmlpull</groupId>
+            <artifactId>xmlpull</artifactId>
+            <version>1.1.3.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -140,24 +187,15 @@
 
         </plugins>
         <resources>
-              <resource>
-                   <directory>src/main/webapp</directory>
-               </resource>
-               <resource>
-                   <directory>src/main/resources</directory>
-               </resource>
-               <resource>
-                     <directory>src/main/java</directory>
-                     <includes>
-                         <include>**/*.xml</include>
-                     </includes>
-                 </resource>
-                 <resource>
-                     <directory>src/main/resources/lib</directory>
-                     <includes>
-                         <include>**/*.jar</include>
-                     </includes>
-                 </resource>
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.properties</include>-->
+<!--                    <include>**/*.xml</include>-->
+<!--                    <include>**/*.p12</include>-->
+<!--                </includes>-->
+<!--                <filtering>true</filtering>-->
+<!--            </resource>-->
              </resources>
     </build>
 

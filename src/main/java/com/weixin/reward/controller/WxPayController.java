@@ -62,8 +62,24 @@ public class WxPayController {
     @RequestMapping("/payToPerson")
     @ResponseBody
     public Map payToPerson(@RequestBody Transfers transfers){
-//        wxPayService.payToPerson(transfers);
-        return null;
+        Map result=new HashMap();
+        Map returnData =new HashMap();
+
+        try {
+          returnData= wxPayService.payToPerson(transfers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+        }
+        result.put("msg","success");
+        result.put("data",returnData);
+        return returnData;
     }
+
+
 }
 
