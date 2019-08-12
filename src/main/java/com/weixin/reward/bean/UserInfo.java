@@ -17,6 +17,7 @@ public class UserInfo {
     private Integer share;
     private Double sum_money;
     private Integer state;
+    private Integer dianji;
 
     public Integer getId() {
         return id;
@@ -146,6 +147,14 @@ public class UserInfo {
         this.state = state;
     }
 
+    public Integer getDianji() {
+        return dianji;
+    }
+
+    public void setDianji(Integer dianji) {
+        this.dianji = dianji;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -165,6 +174,7 @@ public class UserInfo {
                 ", share=" + share +
                 ", sum_money=" + sum_money +
                 ", state=" + state +
+                ", dianji=" + dianji +
                 '}';
     }
 }

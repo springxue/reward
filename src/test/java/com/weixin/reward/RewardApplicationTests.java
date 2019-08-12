@@ -13,10 +13,10 @@ import java.util.Date;
 @SpringBootTest
 public class RewardApplicationTests {
 
-//    @Test
-//    public void contextLoads() {
-////        System.out.println(RewardWxPayUtils.g());
-//    }
+    @Test
+    public void contextLoads() {
+        System.out.println("je;;pwpr");
+    }
 //    @Test
 //    public void xmlTest(){
 //        String xml="<xml>\n" +

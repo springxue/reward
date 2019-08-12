@@ -73,7 +73,8 @@ public class SettingController {
         Setting setting=new Setting();
         try{
           setting=settingService.getSetting();
-
+            System.out.println("+++++++++++");
+            System.out.println(setting);
         }catch (Exception e){
             e.printStackTrace();
             result.put("msg","error");

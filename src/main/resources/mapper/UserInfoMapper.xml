@@ -48,6 +48,9 @@
                 <if test="state!=null">
                     state,
                 </if>
+                <if test="dianji!=null">
+                    dianji,
+                </if>
                 status,
            </trim>
 
@@ -96,6 +99,9 @@
                 <if test="state!=null">
                     #{state},
                 </if>
+                <if test="dianji!=null">
+                    #{dianji},
+                </if>
                    0,
             </trim>
             )
@@ -124,6 +130,7 @@
             <if test="share!=null">share=#{share},</if>
             <if test="sum_money!=null">sum_money=#{sum_money},</if>
             <if test="state!=null">state=#{state},</if>
+            <if test="dianji!=null">dianji=#{dianji},</if>
             status=1,
         </trim>
         where openid=#{openid}

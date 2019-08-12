@@ -2,14 +2,14 @@ package com.weixin.reward.bean;
 
 public class Setting {
     private int id;
-    private double box0;
-    private double box1;
-    private double box2;
-    private double box3;
-    private double box4;
-    private double box5;
-    private double box6;
-    private double box7;
+    private Double box0;
+    private Double box1;
+    private Double box2;
+    private Double box3;
+    private Double box4;
+    private Double box5;
+    private Double box6;
+    private Double box7;
     private String serial;
     private int reward_id;
 
@@ -21,67 +21,67 @@ public class Setting {
         this.id = id;
     }
 
-    public double getBox0() {
+    public Double getBox0() {
         return box0;
     }
 
-    public void setBox0(double box0) {
+    public void setBox0(Double box0) {
         this.box0 = box0;
     }
 
-    public double getBox1() {
+    public Double getBox1() {
         return box1;
     }
 
-    public void setBox1(double box1) {
+    public void setBox1(Double box1) {
         this.box1 = box1;
     }
 
-    public double getBox2() {
+    public Double getBox2() {
         return box2;
     }
 
-    public void setBox2(double box2) {
+    public void setBox2(Double box2) {
         this.box2 = box2;
     }
 
-    public double getBox3() {
+    public Double getBox3() {
         return box3;
     }
 
-    public void setBox3(double box3) {
+    public void setBox3(Double box3) {
         this.box3 = box3;
     }
 
-    public double getBox4() {
+    public Double getBox4() {
         return box4;
     }
 
-    public void setBox4(double box4) {
+    public void setBox4(Double box4) {
         this.box4 = box4;
     }
 
-    public double getBox5() {
+    public Double getBox5() {
         return box5;
     }
 
-    public void setBox5(double box5) {
+    public void setBox5(Double box5) {
         this.box5 = box5;
     }
 
-    public double getBox6() {
+    public Double getBox6() {
         return box6;
     }
 
-    public void setBox6(double box6) {
+    public void setBox6(Double box6) {
         this.box6 = box6;
     }
 
-    public double getBox7() {
+    public Double getBox7() {
         return box7;
     }
 
-    public void setBox7(double box7) {
+    public void setBox7(Double box7) {
         this.box7 = box7;
     }
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -51,7 +52,7 @@ public class WxPayController {
         return result;
     }
     @RequestMapping(value = "/getPrePayNotify")
- public String getPrePayNotify(HttpServletRequest request,HttpServletResponse response){
+ public String getPrePayNotify(HttpServletRequest request, HttpServletResponse response){
         System.out.println("========这是回调页面========");
         System.out.println(request);
         return null;
