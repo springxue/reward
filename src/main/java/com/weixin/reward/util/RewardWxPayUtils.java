@@ -1,5 +1,8 @@
 package com.weixin.reward.util;
 
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.ssl.SSLSocketFactoryBuilder;
+import com.github.wxpay.sdk.WXPayUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
@@ -10,11 +13,17 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.security.KeyStore;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -143,4 +152,32 @@ public class RewardWxPayUtils {
         }
        return hostAddress;
     }
+
+//    public  String doPostSSL(String url, Map<String, String> params, InputStream certFile, String certPass)throws Exception {
+//        String data=WXPayUtil.mapToXml(params);
+//      String result=  HttpRequest.post(url)
+//                .setSSLSocketFactory(SSLSocketFactoryBuilder
+//                        .create()
+//                        .setProtocol(SSLSocketFactoryBuilder.TLSv1)
+//                        .setKeyManagers(getKeyManager(certPass, null, certFile))
+//                        .setSecureRandom(new SecureRandom())
+//                        .build()
+//                )
+//                .body(data)
+//                .execute()
+//                .body();
+//
+//        return HttpKit.getDelegate().post(url, WxPayKit.toXml(params), certFile, certPass);
+//    }
+//    public KeyManager[] getKeyManager(String certPass, String certPath, InputStream certFile) throws Exception {
+//        KeyStore clientStore = KeyStore.getInstance("PKCS12");
+//        if (certFile != null) {
+//            clientStore.load(certFile, certPass.toCharArray());
+//        } else {
+//            clientStore.load(new FileInputStream(certPath), certPass.toCharArray());
+//        }
+//        KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+//        kmf.init(clientStore, certPass.toCharArray());
+//        return kmf.getKeyManagers();
+//    }
 }
