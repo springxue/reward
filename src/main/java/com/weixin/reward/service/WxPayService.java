@@ -72,6 +72,7 @@ public class WxPayService {
         String sign = "";
         try {
 //            sign=  WXPayUtil.generateSignature(requestDataMap,"cjxcx20190808wwwcjxcxscn585657ds", WXPayConstants.SignType.MD5);
+            System.out.println(requestDataMap);
 
             sign = WXPayUtil.generateSignature(requestDataMap, "19565cjhgkr526opy5879yrfgt002134", WXPayConstants.SignType.MD5);
 //            sign=  WXPayUtil.generateSignature(requestDataMap,"xuezhenchunbaishihui123456789011", WXPayConstants.SignType.MD5);
@@ -142,7 +143,7 @@ public class WxPayService {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             System.out.println(keyStore.getProvider());
 
-            keyStore.load(new FileInputStream(new File("src/main/resources/apiclient_cert.p12")), "1547881691".toCharArray());
+            keyStore.load(new FileInputStream(new File("C:\\project\\reward\\src\\main\\resources\\apiclient_cert.p12")), "1547881691".toCharArray());
             SSLContext sslcontext = SSLContexts.custom()
                     //忽略掉对服务器端证书的校验
                     .loadTrustMaterial(new TrustStrategy() {

@@ -17,8 +17,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import javax.net.ssl.SSLContext;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.security.KeyStore;
 import java.util.ArrayList;
@@ -43,11 +42,18 @@ public class HttpUtils {
 	private static SSLContext wx_ssl_context = null; //微信支付ssl证书
 	
 	static{
-		Resource resource = new ClassPathResource("apiclient_cert.p12");
+		Resource resource = new ClassPathResource("C:\\project\\reward\\src\\main\\resources\\apiclient_cert.p12");
 		try {
 			KeyStore keystore = KeyStore.getInstance("PKCS12");
-			char[] keyPassword = ConfigUtil.getProperty("1547881691").toCharArray(); //证书密码
-			keystore.load(resource.getInputStream(), keyPassword);
+			char[] keyPassword = "1547881691".toCharArray(); //证书密码
+			File file = new File("C:\\project\\reward\\src\\main\\resources\\apiclient_cert.p12");
+			InputStream certStream=null;
+			try {
+				certStream = new FileInputStream(file);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			keystore.load(certStream, keyPassword);
 			wx_ssl_context = SSLContexts.custom().loadKeyMaterial(keystore, keyPassword).build();
 		} catch (Exception e) {
 			e.printStackTrace();

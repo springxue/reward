@@ -90,7 +90,7 @@ public class WxPayController {
         result.put("data",returnData);
         return returnData;
     }
-    @RequestMapping("/transfer")
+    @RequestMapping("/Mytransfer")
     @ResponseBody
     public Map transfer(@RequestBody Transfers transfers) throws Exception{
         Map resultMap = new TreeMap();
@@ -107,12 +107,27 @@ public class WxPayController {
             parm.put("amount", String.valueOf(transfers.getAmount())); //转账金额
             parm.put("desc", transfers.getDesc()); //企业付款描述信息
             parm.put("spbill_create_ip", RewardWxPayUtils.getLocalIp()); //服务器Ip地址
+//        parm.put("sign_type", "MD5");
+        System.out.println("===传入的map===");
             System.out.println(parm);
-            String sign=WXPayUtil.generateSignature(parm,"19565cjhgkr526opy5879yrfgt002134", WXPayConstants.SignType.MD5);
+            String sign=WXPayUtil.generateSignature(parm,"cjxcx12090810hgyrdgk54ohde8sxm85", WXPayConstants.SignType.MD5);
             System.out.println(sign);
             parm.put("sign",sign );
 
-            String paramXml = WXPayUtil.mapToXml(parm);
+//            String paramXml = WXPayUtil.mapToXml(parm);
+        String paramXml="<xml>\n" +
+                "<amount>1</amount>\n" +
+                "<check_name>NO_CHECK</check_name>\n" +
+                "<desc>paytoperson</desc>\n" +
+                "<mch_appid>wxa7650780ab7edbbf</mch_appid>\n" +
+                "<mchid>1547881691</mchid>\n" +
+                "<nonce_str>Q9T2GAVPMWKI2E2CKTBXV009SWXPCPAC</nonce_str>\n" +
+                "<openid>ooNi15B1TuvknFnIkwt1s5CgjXJw</openid>\n" +
+                "<partner_trade_no>1565765992121TcA8UdFRTExy8</partner_trade_no>\n" +
+                "<spbill_create_ip>10.16.202.190</spbill_create_ip>\n" +
+                "<sign>E3E076BD6949690024B4839302886632</sign>\n" +
+                "</xml>";
+        System.out.println(paramXml);
         //加载证书
         KeyStore clientStore = null;
         try {
@@ -121,7 +136,7 @@ public class WxPayController {
             e.printStackTrace();
         }
 
-        File file = new File("apiclient_cert.p12");
+        File file = new File("C:\\project\\reward\\src\\main\\resources\\apiclient_cert.p12");
         InputStream certStream=null;
         try {
              certStream = new FileInputStream(file);

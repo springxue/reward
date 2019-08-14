@@ -1,6 +1,8 @@
 package com.weixin.reward.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.wxpay.sdk.WXPayConstants;
+import com.github.wxpay.sdk.WXPayUtil;
 import com.weixin.reward.bean.JsonResult;
 import com.weixin.reward.bean.ResponseData;
 import com.weixin.reward.bean.Transfers;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 创建时间：2016年11月9日 下午5:49:00
@@ -58,20 +61,38 @@ public class TransferController {
 		
 		Map<String, String> restmap = null;
 		try {
-			Map<String, String> parm = new HashMap<String, String>();
-			parm.put("mch_appid", APP_ID); //公众账号appid
-			parm.put("mchid", MCH_ID); //商户号
-			parm.put("nonce_str", PayUtil.getNonceStr()); //随机字符串
+			Map<String, String> parm = new TreeMap<String, String>();
+			parm.put("mch_appid", "wxa7650780ab7edbbf"); //公众账号appid
+			parm.put("mchid", "1547881691"); //商户号
+			parm.put("nonce_str", PayUtil.getNonceStr().toUpperCase()); //随机字符串
 			parm.put("partner_trade_no", PayUtil.getTransferNo()); //商户订单号
 			parm.put("openid", transfers.getOpenid()); //用户openid
 			parm.put("check_name", "NO_CHECK"); //校验用户姓名选项 OPTION_CHECK
 			//parm.put("re_user_name", "安迪"); //check_name设置为FORCE_CHECK或OPTION_CHECK，则必填
 			parm.put("amount", "1"); //转账金额
-			parm.put("desc", "测试转账到个人"); //企业付款描述信息
-			parm.put("spbill_create_ip", PayUtil.getLocalIp(request)); //Ip地址
-			parm.put("sign", PayUtil.getSign(parm, API_SECRET));
+			parm.put("desc", "test"); //企业付款描述信息
+			parm.put("spbill_create_ip", RewardWxPayUtils.getLocalIp()); //Ip地址
+			String sign=WXPayUtil.generateSignature(parm,"cjxcx12090810hgyrdgk54ohde8sxm85");
+			parm.put("sign",sign);
+			String paramXML=WXPayUtil.mapToXml(parm);
+//			paramXML="<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n" +
+////					"<xml>\n" +
+////					"<amount>1</amount>\n" +
+////					"<check_name>NO_CHECK</check_name>\n" +
+////					"<desc>test</desc>\n" +
+////					"<mch_appid>wxa7650780ab7edbbf</mch_appid>\n" +
+////					"<mchid>1547881691</mchid>\n" +
+////					"<nonce_str>ZKSYV5LQRNSETX0ADAOULDKMT0BEZI82</nonce_str>\n" +
+////					"<openid>ooNi15B1TuvknFnIkwt1s5CgjXJw</openid>\n" +
+////					"<partner_trade_no>TNO2019081416333098800000001</partner_trade_no>\n" +
+////
+////					"<spbill_create_ip>0:0:0:0:0:0:0:1</spbill_create_ip>\n" +
+////					"<sign>D5D2235E226935624418D4FAE55A13B6</sign>\n" +
+////					"</xml>\n";
+			System.out.println(paramXML);
+			String restxml = HttpUtils.posts(TRANSFERS_PAY,paramXML);
 
-			String restxml = HttpUtils.posts(TRANSFERS_PAY, XmlUtil.xmlFormat(parm, false));
+//			String restxml = HttpUtils.posts(TRANSFERS_PAY, XmlUtil.xmlFormat(parm, false));
 			restmap = XmlUtil.xmlParse(restxml);
 			System.out.println("========企业付款2=========");
 			System.out.println(restxml);
