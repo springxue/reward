@@ -1,5 +1,6 @@
 package com.weixin.reward.controller;
 
+import com.weixin.reward.bean.Res;
 import com.weixin.reward.bean.UserInfo;
 import com.weixin.reward.bean.UserMessage;
 import com.weixin.reward.service.RewardService;
@@ -75,6 +76,26 @@ public class RewardController {
         }
         result.put("data",userInfoService.getUserInfoByOpenid(userInfo.getOpenid()));
         result.put("msg","success");
+        return result;
+    }
+
+    @RequestMapping("/saveUserInfoAndUnionId")
+    @ResponseBody
+    public Map saveUserInfoAndUnionId(@RequestBody Res res) {
+        Map result=new HashMap();
+        try {
+            userInfoService.saveUserInfoAndUnionId(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("msg","error");
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw, true));
+            String str = sw.toString();
+            result.put("exception",str);
+            return result;
+        }
+//        result.put("data",userInfoService.getUserInfoByOpenid(res.getUserInfo().getOpenid()));
+//        result.put("msg","success");
         return result;
     }
 

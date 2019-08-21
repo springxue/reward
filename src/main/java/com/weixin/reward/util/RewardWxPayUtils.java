@@ -1,10 +1,9 @@
 package com.weixin.reward.util;
 
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.ssl.SSLSocketFactoryBuilder;
-import com.github.wxpay.sdk.WXPayUtil;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -12,20 +11,23 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.codehaus.xfire.util.Base64;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import java.io.FileInputStream;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.security.KeyStore;
+import java.security.AlgorithmParameters;
 import java.security.MessageDigest;
-import java.security.SecureRandom;
-import java.text.SimpleDateFormat;
+import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.util.*;
+
 
 public class RewardWxPayUtils {
     /**
@@ -180,4 +182,67 @@ public class RewardWxPayUtils {
 //        kmf.init(clientStore, certPass.toCharArray());
 //        return kmf.getKeyManagers();
 //    }
+public static Map<String, Object> parseJSON2Map(JSONObject json) {
+    Map<String, Object> map = new HashMap<String, Object>();
+    // 最外层解析
+    for (Object k : json.keySet()) {
+        Object v = json.get(k);
+        // 如果内层还是数组的话，继续解析
+        if (v instanceof JSONArray) {
+            List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+            @SuppressWarnings("unchecked")
+            Iterator<JSONObject> it = ((JSONArray) v).iterator();
+            while (it.hasNext()) {
+                JSONObject json2 = it.next();
+                list.add(parseJSON2Map(json2));
+            }
+            map.put(k.toString(), list);
+        } else {
+            map.put(k.toString(), v);
+        }
+    }
+    return map;
+}
+    /**
+     * 获取信息
+     */
+    public  static String getUserInfo(String encryptedData,String sessionkey,String iv){
+        // 被加密的数据
+        byte[] dataByte = Base64.decode(encryptedData);
+        // 加密秘钥
+        byte[] keyByte = Base64.decode(sessionkey);
+        // 偏移量
+        byte[] ivByte = Base64.decode(iv);
+        try {
+            // 如果密钥不足16位，那么就补足.  这个if 中的内容很重要
+            int base = 16;
+            if (keyByte.length % base != 0) {
+                int groups = keyByte.length / base + (keyByte.length % base != 0 ? 1 : 0);
+                byte[] temp = new byte[groups * base];
+                Arrays.fill(temp, (byte) 0);
+                System.arraycopy(keyByte, 0, temp, 0, keyByte.length);
+                keyByte = temp;
+            }
+            // 初始化
+            Security.addProvider(new BouncyCastleProvider());
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS7Padding","BC");
+            SecretKeySpec spec = new SecretKeySpec(keyByte, "AES");
+            AlgorithmParameters parameters = AlgorithmParameters.getInstance("AES");
+            parameters.init(new IvParameterSpec(ivByte));
+            cipher.init(Cipher.DECRYPT_MODE, spec, parameters);// 初始化
+            byte[] resultByte = cipher.doFinal(dataByte);
+            if (null != resultByte && resultByte.length > 0) {
+                String result = new String(resultByte, "UTF-8");
+//                return JSONObject.parseObject(result);
+                System.out.println("解密结果");
+                System.out.println(result);
+                return result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
