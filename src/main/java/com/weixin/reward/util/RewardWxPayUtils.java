@@ -1,8 +1,8 @@
 package com.weixin.reward.util;
 
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONArray;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -233,10 +233,11 @@ public static Map<String, Object> parseJSON2Map(JSONObject json) {
             byte[] resultByte = cipher.doFinal(dataByte);
             if (null != resultByte && resultByte.length > 0) {
                 String result = new String(resultByte, "UTF-8");
-//                return JSONObject.parseObject(result);
+                JSONObject jsonObject= JSONObject.fromObject(result);
+                Map resultMap=RewardWxPayUtils.parseJSON2Map(jsonObject);
                 System.out.println("解密结果");
-                System.out.println(result);
-                return result;
+                System.out.println(resultMap);
+                return String.valueOf(resultMap.get("unionId"));
             }
         } catch (Exception e) {
             e.printStackTrace();

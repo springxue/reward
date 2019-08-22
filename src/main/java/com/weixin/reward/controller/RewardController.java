@@ -6,6 +6,7 @@ import com.weixin.reward.bean.UserMessage;
 import com.weixin.reward.service.RewardService;
 import com.weixin.reward.service.SettingService;
 import com.weixin.reward.service.UserInfoService;
+import com.weixin.reward.util.RewardWxPayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,12 +40,15 @@ public class RewardController {
     @RequestMapping("/getOpenId")
     @ResponseBody
     //获取openid
-    public Map getOpenid(@RequestParam String code) {
+    public Map getOpenid(@RequestParam String code,@RequestParam String encryptedData,@RequestParam String iv ) {
         System.out.println(code);
         Map openidAndSessionKey=new HashMap();
         Map result=new HashMap();
         try{
             openidAndSessionKey =rewardService.getOpenid(code);
+            String session_key=String.valueOf(openidAndSessionKey.get("session_key"));
+         String unionid=RewardWxPayUtils.getUserInfo(encryptedData,session_key,iv);
+         openidAndSessionKey.put("unionid",unionid);
         }catch (Exception e){
             e.printStackTrace();
             result.put("msg","error");
