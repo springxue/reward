@@ -94,8 +94,8 @@ public class RewardController {
             result.put("exception",str);
             return result;
         }
-//        result.put("data",userInfoService.getUserInfoByOpenid(res.getUserInfo().getOpenid()));
-//        result.put("msg","success");
+        result.put("data",userInfoService.getUserInfoByOpenid(res.getUserInfo().getOpenid()));
+        result.put("msg","success");
         return result;
     }
 

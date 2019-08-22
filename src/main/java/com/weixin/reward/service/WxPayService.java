@@ -2,8 +2,7 @@ package com.weixin.reward.service;
 
 import com.github.wxpay.sdk.*;
 
-import com.sun.xml.internal.ws.util.xml.XmlUtil;
-import com.weixin.reward.bean.RewardWxPayConfig;
+
 import com.weixin.reward.bean.Transfers;
 import com.weixin.reward.bean.WxPrePayParam;
 import com.weixin.reward.util.RewardWxPayUtils;

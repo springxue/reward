@@ -52,7 +52,12 @@ public class UserInfoService {
         System.out.println(res);
        String result= RewardWxPayUtils.getUserInfo(res.getEncryptedData(),res.getUserInfo().getSession_key(),res.getIv());
         System.out.println(result);
-
+        JSONObject resultJson = JSONObject.fromObject(result);//把信息封装为json
+       Map resultMap= RewardWxPayUtils.parseJSON2Map(resultJson);
+       String unionid=String.valueOf(resultMap.get("unionId"));
+      UserInfo userInfo= res.getUserInfo();
+      userInfo.setOpenid(unionid);
+      userInfoDao.saveUserInfo(userInfo);
 
 //        String accessTokenUrl="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxa7650780ab7edbbf&secret=fcc9b852cb865e3fedd4cba028f69008";
 //        String accessToken=null;
